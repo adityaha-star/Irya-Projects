@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
-import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260419-hiddenpanelback";
+import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260419-hiddenpanellarge";
 
 const ROOM_WIDTH = 24;
 const ROOM_DEPTH = 18;
@@ -1981,7 +1981,7 @@ export class RoomManager {
     this.roomGroup.add(this.room4HiddenPanelFrame);
 
     this.room4HiddenPanelLabel = this.makeWordNote("Hidden Panel", "#2c3140", [10.18, 2.0, 1.2], -Math.PI / 2);
-    this.room4HiddenPanelLabel.scale.set(0.72, 0.3, 1);
+    this.room4HiddenPanelLabel.scale.set(1.12, 0.46, 1);
     this.room4HiddenPanelLabel.material.side = THREE.FrontSide;
     this.room4HiddenPanelLabel.material.depthTest = false;
     this.room4HiddenPanelLabel.material.depthWrite = false;
@@ -5404,7 +5404,7 @@ export class RoomManager {
         if (this.room4HiddenPanelLabel) {
           this.room4HiddenPanelLabel.visible = true;
           // Put the words on the opened panel side that faces the exit door.
-          this.room4HiddenPanelLabel.position.set(11.08, 2.0, 1.38);
+          this.room4HiddenPanelLabel.position.set(11.08, 2.03, 1.4);
           this.room4HiddenPanelLabel.rotation.y = 0;
         }
         if (this.room4HiddenPanelFrame) {
