@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Four Room Escape</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div id="game-shell">
+      <canvas id="game-canvas"></canvas>
+
+      <div id="hud">
+        <div id="timer">Time: 00:00</div>
+        <div id="room-label">Room 1</div>
+      </div>
+
+      <div id="objective" class="banner hidden"></div>
+      <div id="message" class="banner hidden"></div>
+      <div id="helper-note">
+        When you open an object, move your cursor around and search for tools to add to your toolbox
+      </div>
+      <div id="crosshair" aria-hidden="true">
+        <span></span>
+        <span></span>
+      </div>
+      <div id="look-label" class="hidden"></div>
+
+      <div id="inventory-panel">
+        <div class="inventory-title">Toolbox</div>
+        <div id="inventory-items"></div>
+      </div>
+
+      <div id="inventory-help">
+        Inventory: press 1, 2, 3, 4 and so on to select tools
+      </div>
+
+      <div id="start-screen" class="overlay">
+        <div class="panel">
+          <h1>Four Room Escape</h1>
+          <p>Explore each room, solve puzzles, and escape before time runs out.</p>
+          <p class="small">Move: W A S D | Look: Mouse | Interact: Click or Space</p>
+          <button id="play-button">Play</button>
+        </div>
+      </div>
+
+      <div id="pause-tip" class="overlay hidden">
+        <div class="panel small-panel">
+          <h2>Game Paused</h2>
+          <p>Press Escape again or click to continue.</p>
+        </div>
+      </div>
+
+      <div id="code-screen" class="overlay hidden">
+        <div class="panel small-panel">
+          <h2 id="code-title">Code</h2>
+          <p id="code-text">Enter the code.</p>
+          <input id="code-input" type="text" maxlength="4" autocomplete="off" spellcheck="false" />
+          <div class="code-actions">
+            <button id="code-submit-button">Unlock</button>
+            <button id="code-cancel-button" class="secondary-button">Cancel</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="flow-screen" class="overlay hidden">
+        <div id="flow-panel" class="panel flow-panel">
+          <h2 id="flow-title">Do you wish to continue</h2>
+          <p id="flow-text"></p>
+          <div class="code-actions flow-actions">
+            <button id="flow-primary-button">Yes</button>
+            <button id="flow-secondary-button" class="secondary-button">No</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="end-screen" class="overlay hidden">
+        <div class="panel">
+          <h2 id="end-title">You Escaped!</h2>
+          <p id="end-text">Great job solving the first room.</p>
+          <button id="restart-button">Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./main.js?v=20260416-fullflow"></script>
+  </body>
+</html>
