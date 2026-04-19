@@ -1,4 +1,4 @@
-when import * as THREE from "https://esm.sh/three@0.164.1";
+import * as THREE from "https://esm.sh/three@0.164.1";
 import { PointerLockControls } from "https://esm.sh/three@0.164.1/examples/jsm/controls/PointerLockControls.js";
 import { Inventory } from "./inventory.js?v=20260416-fullflow";
 import { RoomManager } from "./roomManager.js?v=20260416-fullflow";
