@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
-import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260416-fullflow";
+import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260419-soundfix";
 
 const ROOM_WIDTH = 24;
 const ROOM_DEPTH = 18;
