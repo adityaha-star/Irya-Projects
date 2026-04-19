@@ -1,8 +1,8 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
 import { PointerLockControls } from "https://esm.sh/three@0.164.1/examples/jsm/controls/PointerLockControls.js";
-import { Inventory } from "./inventory.js?v=20260419-soundfix";
-import { RoomManager } from "./roomManager.js?v=20260419-soundfix";
-import { UI } from "./ui.js?v=20260419-soundfix";
+import { Inventory } from "./inventory.js?v=20260419-hiddenpanelback";
+import { RoomManager } from "./roomManager.js?v=20260419-hiddenpanelback";
+import { UI } from "./ui.js?v=20260419-hiddenpanelback";
 
 const PLAYER_RADIUS = 0.45;
 const MOVE_SPEED = 4.2;
@@ -605,6 +605,11 @@ function returnToStartScreen() {
   ui.showStart(true);
 }
 
+function returnToRootHomePage() {
+  returnToStartScreen();
+  window.location.href = "../index.html";
+}
+
 function restartGame() {
   clearRecordMusicLoop();
   gameFlow.popupOpen = false;
@@ -640,7 +645,7 @@ function showSecondChoicePopup() {
       restartGame();
     },
     () => {
-      returnToStartScreen();
+      returnToRootHomePage();
     },
   );
 }

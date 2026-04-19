@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
-import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260419-soundfix";
+import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260419-hiddenpanelback";
 
 const ROOM_WIDTH = 24;
 const ROOM_DEPTH = 18;
@@ -188,6 +188,7 @@ export class RoomManager {
     this.room4PlacedLetterMeshes = [];
     this.room4HiddenPanel = null;
     this.room4HiddenPanelFrame = null;
+    this.room4HiddenPanelLabel = null;
     this.room4ArrowClues = [];
     this.room4ArrowPanels = [];
     this.room4FinalCabinetBody = null;
@@ -1969,15 +1970,25 @@ export class RoomManager {
   }
 
   addHiddenWallPanel() {
-    this.room4HiddenPanel = this.makeBox([1.45, 1.45, 0.1], 0xf8d58b);
+    this.room4HiddenPanel = this.makeBox([1.95, 1.75, 0.12], 0xf8d58b);
     this.room4HiddenPanel.position.set(10.3, 2.0, 1.2);
     this.room4HiddenPanel.userData = { kind: "room4HiddenPanel", label: "Hidden Wall Panel" };
     this.roomGroup.add(this.room4HiddenPanel);
     this.interactiveObjects.push(this.room4HiddenPanel);
 
-    this.room4HiddenPanelFrame = this.makeBox([1.62, 1.62, 0.06], 0xffffff);
+    this.room4HiddenPanelFrame = this.makeBox([2.14, 1.94, 0.07], 0xffffff);
     this.room4HiddenPanelFrame.position.set(10.26, 2.0, 1.14);
     this.roomGroup.add(this.room4HiddenPanelFrame);
+
+    this.room4HiddenPanelLabel = this.makeWordNote("Hidden Panel", "#2c3140", [10.18, 2.0, 1.2], -Math.PI / 2);
+    this.room4HiddenPanelLabel.scale.set(0.72, 0.3, 1);
+    this.room4HiddenPanelLabel.material.side = THREE.FrontSide;
+    this.room4HiddenPanelLabel.material.depthTest = false;
+    this.room4HiddenPanelLabel.material.depthWrite = false;
+    this.room4HiddenPanelLabel.renderOrder = 8;
+    this.room4HiddenPanelLabel.visible = false;
+    this.room4HiddenPanelLabel.userData = { kind: "room4HiddenPanel", label: "Hidden Wall Panel" };
+    this.roomGroup.add(this.room4HiddenPanelLabel);
 
     const cluePosition = [-0.2, 3.28, HALF_DEPTH - 0.34];
     const clueRotation = Math.PI;
@@ -5389,6 +5400,12 @@ export class RoomManager {
           this.room4HiddenPanel.position.x += 0.95;
           this.room4HiddenPanel.position.z -= 0.28;
           this.room4HiddenPanel.rotation.y = -0.72;
+        }
+        if (this.room4HiddenPanelLabel) {
+          this.room4HiddenPanelLabel.visible = true;
+          // Put the words on the opened panel side that faces the exit door.
+          this.room4HiddenPanelLabel.position.set(11.08, 2.0, 1.38);
+          this.room4HiddenPanelLabel.rotation.y = 0;
         }
         if (this.room4HiddenPanelFrame) {
           this.room4HiddenPanelFrame.material.color.setHex(0xffefad);
