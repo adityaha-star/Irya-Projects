@@ -6,7 +6,7 @@
   --text: #f4fbff;
   --accent: #ffd447;
   --good: #6cf2a7;
-  --warn: #ff8d6d;
+  --warn: #fb8260;
   --soft-shadow: 0 18px 45px rgba(0, 0, 0, 0.3);
   --ui-font: "Trebuchet MS", "Segoe UI", sans-serif;
 }
@@ -104,24 +104,6 @@ button:hover {
   bottom: 140px;
 }
 
-#helper-note {
-  position: fixed;
-  top: 74px;
-  right: 16px;
-  max-width: min(320px, calc(100vw - 32px));
-  padding: 0.8rem 0.95rem;
-  border-radius: 16px;
-  background: rgba(9, 20, 32, 0.76);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: var(--soft-shadow);
-  backdrop-filter: blur(10px);
-  color: #eef7ff;
-  font-size: 0.92rem;
-  line-height: 1.4;
-  z-index: 3;
-  pointer-events: none;
-}
-
 .hidden {
   display: none !important;
 }
@@ -168,27 +150,6 @@ button:hover {
   transform: translate(-50%, -50%) scale(1.18);
 }
 
-#look-label {
-  position: fixed;
-  top: calc(50% + 24px);
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 84px;
-  max-width: min(280px, calc(100vw - 32px));
-  padding: 0.38rem 0.7rem;
-  border-radius: 999px;
-  background: rgba(9, 20, 32, 0.78);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: var(--soft-shadow);
-  backdrop-filter: blur(10px);
-  color: #eef7ff;
-  font-size: 0.88rem;
-  line-height: 1.2;
-  text-align: center;
-  pointer-events: none;
-  z-index: 3;
-}
-
 #inventory-panel {
   position: fixed;
   left: 16px;
@@ -231,44 +192,17 @@ button:hover {
 
 .inventory-item {
   min-width: 110px;
-  min-height: 92px;
-  padding: 0.6rem 0.75rem 0.7rem;
+  padding: 0.65rem 0.85rem;
   border-radius: 14px;
   border: 1px solid rgba(255, 255, 255, 0.14);
   background: rgba(255, 255, 255, 0.08);
   color: var(--text);
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 0.42rem;
-  text-align: center;
 }
 
 .inventory-item.selected {
   outline: 2px solid var(--accent);
   background: rgba(255, 212, 71, 0.18);
-}
-
-.inventory-thumb {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  font-size: 1.35rem;
-  line-height: 1;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
-
-.inventory-label {
-  font-size: 0.84rem;
-  line-height: 1.15;
-  font-weight: 700;
 }
 
 .inventory-empty {
@@ -298,40 +232,6 @@ button:hover {
 
 .small-panel {
   width: min(380px, 100%);
-}
-
-.flow-panel {
-  width: min(700px, 100%);
-  padding: 36px 32px;
-}
-
-.flow-panel p {
-  white-space: pre-line;
-  font-size: 1.08rem;
-  line-height: 1.5;
-  margin: 14px 0 0;
-}
-
-.flow-actions {
-  margin-top: 24px;
-  gap: 18px;
-}
-
-.final-flow-panel {
-  width: min(820px, 100%);
-  padding: 44px 36px;
-  background: linear-gradient(180deg, rgba(27, 47, 68, 0.96), rgba(15, 26, 40, 0.98));
-  border: 2px solid rgba(255, 226, 130, 0.45);
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45), 0 0 30px rgba(255, 212, 71, 0.2);
-}
-
-.final-flow-panel h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
-  color: #fff4b8;
-}
-
-.final-flow-panel p {
-  font-size: 1.22rem;
 }
 
 #code-input {
@@ -370,11 +270,6 @@ button:hover {
 @media (max-width: 720px) {
   #message {
     bottom: 156px;
-  }
-
-  #helper-note {
-    top: 132px;
-    font-size: 0.86rem;
   }
 
   #inventory-help {

@@ -1,4 +1,4 @@
-import * as THREE from "https://esm.sh/three@0.164.1";
+when import * as THREE from "https://esm.sh/three@0.164.1";
 import { PointerLockControls } from "https://esm.sh/three@0.164.1/examples/jsm/controls/PointerLockControls.js";
 import { Inventory } from "./inventory.js?v=20260416-fullflow";
 import { RoomManager } from "./roomManager.js?v=20260416-fullflow";
@@ -50,7 +50,6 @@ function openCodeEntryUI(config) {
     config,
     (value) => {
       const result = roomManager.submitCode(config.type, value);
-      playSoundCue(result?.playSound);
       if (result?.success) {
         closeCodeUI(false);
         if (result.won) {
@@ -73,8 +72,6 @@ const raycaster = new THREE.Raycaster();
 const direction = new THREE.Vector3();
 const right = new THREE.Vector3();
 let audioContext = null;
-let recordMusicTimeouts = [];
-let recordMusicSession = 0;
 
 const pressed = {
   forward: false,
@@ -361,97 +358,6 @@ function playCabinetButtonTone(colorName) {
   osc2.stop(context.currentTime + 0.18);
 }
 
-function clearRecordMusicLoop() {
-  recordMusicSession += 1;
-  for (const timeoutId of recordMusicTimeouts) {
-    window.clearTimeout(timeoutId);
-  }
-  recordMusicTimeouts = [];
-}
-
-function playSoftSynthNote(frequency, duration = 0.34, volume = 0.1) {
-  const context = getAudioContext();
-  if (!context) {
-    return;
-  }
-
-  const osc = context.createOscillator();
-  const osc2 = context.createOscillator();
-  const filter = context.createBiquadFilter();
-  const gain = context.createGain();
-
-  osc.type = "triangle";
-  osc.frequency.setValueAtTime(frequency, context.currentTime);
-  osc2.type = "sine";
-  osc2.frequency.setValueAtTime(frequency * 1.5, context.currentTime);
-  filter.type = "lowpass";
-  filter.frequency.setValueAtTime(1800, context.currentTime);
-  filter.frequency.exponentialRampToValueAtTime(900, context.currentTime + duration);
-  gain.gain.setValueAtTime(volume, context.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + duration);
-
-  osc.connect(filter);
-  osc2.connect(filter);
-  filter.connect(gain);
-  gain.connect(context.destination);
-
-  osc.start();
-  osc2.start();
-  osc.stop(context.currentTime + duration);
-  osc2.stop(context.currentTime + duration);
-}
-
-function startRecordMusicLoop() {
-  clearRecordMusicLoop();
-  const session = recordMusicSession;
-  const phrase = [
-    { note: 392.0, delay: 0, duration: 0.24 },
-    { note: 523.25, delay: 260, duration: 0.22 },
-    { note: 587.33, delay: 520, duration: 0.22 },
-    { note: 523.25, delay: 820, duration: 0.22 },
-    { note: 392.0, delay: 1120, duration: 0.3 },
-    { note: 440.0, delay: 1600, duration: 0.22 },
-    { note: 493.88, delay: 1860, duration: 0.22 },
-    { note: 523.25, delay: 2140, duration: 0.34 },
-  ];
-  const loopDuration = 3200;
-  const totalDuration = 20000;
-
-  const scheduleLoop = () => {
-    if (session !== recordMusicSession) {
-      return;
-    }
-
-    for (const step of phrase) {
-      const timeoutId = window.setTimeout(() => {
-        if (session !== recordMusicSession) {
-          return;
-        }
-        playSoftSynthNote(step.note, step.duration, 0.11);
-      }, step.delay);
-      recordMusicTimeouts.push(timeoutId);
-    }
-
-    const loopId = window.setTimeout(() => {
-      if (session !== recordMusicSession) {
-        return;
-      }
-      scheduleLoop();
-    }, loopDuration);
-    recordMusicTimeouts.push(loopId);
-  };
-
-  scheduleLoop();
-
-  const stopId = window.setTimeout(() => {
-    if (session !== recordMusicSession) {
-      return;
-    }
-    clearRecordMusicLoop();
-  }, totalDuration);
-  recordMusicTimeouts.push(stopId);
-}
-
 function playSoundCue(cue) {
   if (!cue) {
     return;
@@ -489,37 +395,6 @@ function playSoundCue(cue) {
 
   if (cue.type === "cabinetButton") {
     playCabinetButtonTone(cue.colorName);
-    return;
-  }
-
-  if (cue.type === "recordMusic") {
-    startRecordMusicLoop();
-    return;
-  }
-
-  if (cue.type === "bounceWall") {
-    const context = getAudioContext();
-    if (!context) {
-      return;
-    }
-
-    const osc = context.createOscillator();
-    const gain = context.createGain();
-    const filter = context.createBiquadFilter();
-
-    osc.type = "sine";
-    osc.frequency.setValueAtTime(220, context.currentTime);
-    osc.frequency.exponentialRampToValueAtTime(120, context.currentTime + 0.12);
-    filter.type = "lowpass";
-    filter.frequency.setValueAtTime(900, context.currentTime);
-    gain.gain.setValueAtTime(0.24, context.currentTime);
-    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.14);
-
-    osc.connect(filter);
-    filter.connect(gain);
-    gain.connect(context.destination);
-    osc.start();
-    osc.stop(context.currentTime + 0.16);
   }
 }
 
@@ -544,7 +419,6 @@ cornerLamp.position.set(-7, 2.5, 1.5);
 scene.add(cornerLamp);
 
 function clearCurrentRoomState() {
-  clearRecordMusicLoop();
   hoveredObject = null;
   roomManager.setHoveredObject(null);
   roomManager.clearCurrentRoomState();
@@ -572,7 +446,6 @@ function resumeGameplayAfterPopup() {
 }
 
 function loadRoom(roomNumber) {
-  clearRecordMusicLoop();
   const spawn = roomManager.loadRoom(roomNumber, true);
   movePlayerTo(spawn);
   gameFlow.currentRoomNumber = roomNumber;
@@ -586,7 +459,6 @@ function loadRoom(roomNumber) {
 }
 
 function returnToStartScreen() {
-  clearRecordMusicLoop();
   gameFlow.popupOpen = false;
   gameFlow.onStartScreen = true;
   gameFlow.inGame = false;
@@ -607,7 +479,6 @@ function returnToStartScreen() {
 }
 
 function restartGame() {
-  clearRecordMusicLoop();
   gameFlow.popupOpen = false;
   gameFlow.onStartScreen = false;
   gameFlow.inGame = true;
