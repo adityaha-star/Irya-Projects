@@ -169,6 +169,27 @@ button:hover {
   transform: translate(-50%, -50%) scale(1.18);
 }
 
+#look-label {
+  position: fixed;
+  left: 50%;
+  top: calc(50% + 34px);
+  transform: translateX(-50%);
+  min-width: 140px;
+  max-width: min(360px, calc(100vw - 32px));
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(7, 15, 24, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.32);
+  color: #fff8d8;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  pointer-events: none;
+  z-index: 6;
+}
+
 #inventory-panel {
   position: fixed;
   left: 16px;
