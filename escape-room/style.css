@@ -104,6 +104,25 @@ button:hover {
   bottom: 140px;
 }
 
+#helper-note {
+  position: fixed;
+  top: 82px;
+  left: 16px;
+  width: min(360px, calc(100vw - 32px));
+  padding: 0.85rem 1rem;
+  border-radius: 16px;
+  background: rgba(7, 15, 24, 0.84);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: var(--soft-shadow);
+  backdrop-filter: blur(10px);
+  color: #fff8d8;
+  font-size: 0.94rem;
+  font-weight: 700;
+  line-height: 1.35;
+  pointer-events: none;
+  z-index: 5;
+}
+
 .hidden {
   display: none !important;
 }

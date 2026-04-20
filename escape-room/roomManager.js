@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
-import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260419-hiddenpanellarge";
+import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260419-drumpadsound";
 
 const ROOM_WIDTH = 24;
 const ROOM_DEPTH = 18;
@@ -2038,10 +2038,10 @@ export class RoomManager {
 
   addRoom4ArrowPanels() {
     const panelDefs = [
-      { direction: "up", label: "Up Panel", color: 0x71b8ff, position: [4.2, 1.46, 7.85], symbol: "↑" },
-      { direction: "left", label: "Left Panel", color: 0xff6f6f, position: [5.35, 1.46, 7.85], symbol: "←" },
-      { direction: "right", label: "Right Panel", color: 0xffd85e, position: [6.5, 1.46, 7.85], symbol: "→" },
-      { direction: "down", label: "Down Panel", color: 0x79da7d, position: [7.65, 1.46, 7.85], symbol: "↓" },
+      { direction: "up", label: "Up Arrow Panel", color: 0x71b8ff, position: [4.2, 1.46, 7.85], symbol: "↑" },
+      { direction: "left", label: "Left Arrow Panel", color: 0xff6f6f, position: [5.35, 1.46, 7.85], symbol: "←" },
+      { direction: "right", label: "Right Arrow Panel", color: 0xffd85e, position: [6.5, 1.46, 7.85], symbol: "→" },
+      { direction: "down", label: "Down Arrow Panel", color: 0x79da7d, position: [7.65, 1.46, 7.85], symbol: "↓" },
     ];
 
     for (const panelDef of panelDefs) {
@@ -2779,7 +2779,9 @@ export class RoomManager {
   addDrumSet() {
     const drumBase = this.makeBox([2.6, 0.04, 2.0], 0x5b4d7f);
     drumBase.position.set(3.0, 0.03, -2.7);
+    drumBase.userData = { kind: "hint", label: "Drum Set", hint: "Use the snare, kick, and floor tom to play the rhythm." };
     this.roomGroup.add(drumBase);
+    this.interactiveObjects.push(drumBase);
 
     const kick = new THREE.Mesh(
       new THREE.CylinderGeometry(0.58, 0.58, 0.82, 18),
@@ -2802,6 +2804,12 @@ export class RoomManager {
     this.roomGroup.add(kickHitbox);
     this.interactiveObjects.push(kickHitbox);
 
+    const kickLabel = this.makeWordNote("KICK", "#fff4a8", [3.0, 1.52, -1.98], 0);
+    kickLabel.scale.set(0.34, 0.16, 1);
+    kickLabel.userData = { kind: "drumPad", drumName: "kick", label: "Kick" };
+    this.roomGroup.add(kickLabel);
+    this.interactiveObjects.push(kickLabel);
+
     const snare = new THREE.Mesh(
       new THREE.CylinderGeometry(0.32, 0.32, 0.28, 16),
       new THREE.MeshStandardMaterial({ color: 0x6ca7d8 }),
@@ -2820,6 +2828,12 @@ export class RoomManager {
     snareHitbox.userData = { kind: "drumPad", drumName: "snare", label: "Snare" };
     this.roomGroup.add(snareHitbox);
     this.interactiveObjects.push(snareHitbox);
+
+    const snareLabel = this.makeWordNote("SNARE", "#fff4a8", [2.18, 1.52, -1.55], 0);
+    snareLabel.scale.set(0.36, 0.16, 1);
+    snareLabel.userData = { kind: "drumPad", drumName: "snare", label: "Snare" };
+    this.roomGroup.add(snareLabel);
+    this.interactiveObjects.push(snareLabel);
 
     const floorTom = new THREE.Mesh(
       new THREE.CylinderGeometry(0.38, 0.38, 0.42, 16),
@@ -2840,12 +2854,18 @@ export class RoomManager {
     this.roomGroup.add(floorTomHitbox);
     this.interactiveObjects.push(floorTomHitbox);
 
+    const floorTomLabel = this.makeWordNote("FLOOR TOM", "#fff4a8", [3.94, 1.52, -1.55], 0);
+    floorTomLabel.scale.set(0.46, 0.16, 1);
+    floorTomLabel.userData = { kind: "drumPad", drumName: "floorTom", label: "Floor Tom" };
+    this.roomGroup.add(floorTomLabel);
+    this.interactiveObjects.push(floorTomLabel);
+
     const hiHat = new THREE.Mesh(
       new THREE.CylinderGeometry(0.28, 0.28, 0.03, 20),
       new THREE.MeshStandardMaterial({ color: 0xdcb96b }),
     );
     hiHat.position.set(1.88, 1.38, -2.72);
-    hiHat.userData = { kind: "hint", hint: "A drum set waits for a rhythm puzzle later." };
+    hiHat.userData = { kind: "hint", label: "Hi-Hat Cymbal", hint: "This cymbal is part of the drum set." };
     this.roomGroup.add(hiHat);
     this.interactiveObjects.push(hiHat);
     const hiHatStand = this.makeBox([0.06, 1.0, 0.06], 0xbfc7d3);
@@ -2858,7 +2878,7 @@ export class RoomManager {
     );
     crash.position.set(3.92, 1.56, -3.16);
     crash.rotation.z = 0.18;
-    crash.userData = { kind: "hint", hint: "A drum set waits for a rhythm puzzle later." };
+    crash.userData = { kind: "hint", label: "Crash Cymbal", hint: "This cymbal is part of the drum set." };
     this.roomGroup.add(crash);
     this.interactiveObjects.push(crash);
     const crashStand = this.makeBox([0.06, 1.14, 0.06], 0xbfc7d3);
@@ -2871,7 +2891,7 @@ export class RoomManager {
     );
     ride.position.set(3.98, 1.42, -2.08);
     ride.rotation.z = -0.12;
-    ride.userData = { kind: "hint", hint: "A drum set waits for a rhythm puzzle later." };
+    ride.userData = { kind: "hint", label: "Ride Cymbal", hint: "This cymbal is part of the drum set." };
     this.roomGroup.add(ride);
     this.interactiveObjects.push(ride);
     const rideStand = this.makeBox([0.06, 1.02, 0.06], 0xbfc7d3);
@@ -2883,7 +2903,7 @@ export class RoomManager {
       new THREE.MeshStandardMaterial({ color: 0x252934 }),
     );
     stool.position.set(3.0, 0.46, -1.38);
-    stool.userData = { kind: "hint", hint: "A drum stool sits behind the kit." };
+    stool.userData = { kind: "hint", label: "Drum Stool", hint: "A drum stool sits behind the kit." };
     this.roomGroup.add(stool);
     this.interactiveObjects.push(stool);
   }

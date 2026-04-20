@@ -1,8 +1,8 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
 import { PointerLockControls } from "https://esm.sh/three@0.164.1/examples/jsm/controls/PointerLockControls.js";
-import { Inventory } from "./inventory.js?v=20260419-hiddenpanellarge";
-import { RoomManager } from "./roomManager.js?v=20260419-hiddenpanellarge";
-import { UI } from "./ui.js?v=20260419-hiddenpanellarge";
+import { Inventory } from "./inventory.js?v=20260419-drumpadsound";
+import { RoomManager } from "./roomManager.js?v=20260419-drumpadsound";
+import { UI } from "./ui.js?v=20260419-drumpadsound";
 
 const PLAYER_RADIUS = 0.45;
 const MOVE_SPEED = 4.2;
@@ -50,6 +50,7 @@ function openCodeEntryUI(config) {
     config,
     (value) => {
       const result = roomManager.submitCode(config.type, value);
+      playSoundCue(result?.playSound);
       if (result?.success) {
         closeCodeUI(false);
         if (result.won) {
