@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
-import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260420-flowlabels";
+import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260420-arrowsymbols";
 
 const ROOM_WIDTH = 24;
 const ROOM_DEPTH = 18;
@@ -2004,16 +2004,16 @@ export class RoomManager {
     this.roomGroup.add(glowPanel);
     this.room4ArrowClues.push(glowPanel);
 
-    const clueHitbox = this.makeBox([5.7, 1.55, 0.28], 0xffffff);
-    clueHitbox.position.set(-0.2, 3.28, HALF_DEPTH - 0.2);
-    clueHitbox.rotation.y = clueRotation;
-    clueHitbox.material.transparent = true;
-    clueHitbox.material.opacity = 0;
-    clueHitbox.material.depthWrite = false;
-    clueHitbox.visible = false;
-    clueHitbox.userData = { kind: "room4ArrowClue", label: "Arrow Clue: Up, Left, Right, Down" };
-    this.roomGroup.add(clueHitbox);
-    this.room4ArrowClues.push(clueHitbox);
+    const arrowText = "↑   ←   →   ↓";
+    const arrowSequence = this.makeWordNote(arrowText, "#000000", [-0.2, 3.28, HALF_DEPTH - 0.26], clueRotation);
+    arrowSequence.scale.set(1.75, 0.92, 1);
+    arrowSequence.material.depthTest = false;
+    arrowSequence.material.depthWrite = false;
+    arrowSequence.renderOrder = 6;
+    arrowSequence.visible = false;
+    arrowSequence.userData = { kind: "room4ArrowClue", label: "Arrow Clue" };
+    this.roomGroup.add(arrowSequence);
+    this.room4ArrowClues.push(arrowSequence);
   }
 
   addRoom4UvTorch() {
@@ -2039,10 +2039,10 @@ export class RoomManager {
 
   addRoom4ArrowPanels() {
     const panelDefs = [
-      { direction: "up", label: "Arrow Panel", color: 0x71b8ff, position: [4.2, 1.46, 7.85] },
-      { direction: "left", label: "Arrow Panel", color: 0xff6f6f, position: [5.35, 1.46, 7.85] },
-      { direction: "right", label: "Arrow Panel", color: 0xffd85e, position: [6.5, 1.46, 7.85] },
-      { direction: "down", label: "Arrow Panel", color: 0x79da7d, position: [7.65, 1.46, 7.85] },
+      { direction: "up", label: "Up panel", color: 0x71b8ff, position: [4.2, 1.46, 7.85] },
+      { direction: "left", label: "Left panel", color: 0xff6f6f, position: [5.35, 1.46, 7.85] },
+      { direction: "right", label: "Right panel", color: 0xffd85e, position: [6.5, 1.46, 7.85] },
+      { direction: "down", label: "Down panel", color: 0x79da7d, position: [7.65, 1.46, 7.85] },
     ];
 
     for (const panelDef of panelDefs) {

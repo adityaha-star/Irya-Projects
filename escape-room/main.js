@@ -1,8 +1,8 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
 import { PointerLockControls } from "https://esm.sh/three@0.164.1/examples/jsm/controls/PointerLockControls.js";
-import { Inventory } from "./inventory.js?v=20260420-flowlabels";
-import { RoomManager } from "./roomManager.js?v=20260420-flowlabels";
-import { UI } from "./ui.js?v=20260420-flowlabels";
+import { Inventory } from "./inventory.js?v=20260420-arrowsymbols";
+import { RoomManager } from "./roomManager.js?v=20260420-arrowsymbols";
+import { UI } from "./ui.js?v=20260420-arrowsymbols";
 
 const PLAYER_RADIUS = 0.45;
 const MOVE_SPEED = 4.2;
