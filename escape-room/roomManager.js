@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
-import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260420-playfix";
+import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260420-arrowhover";
 
 const ROOM_WIDTH = 24;
 const ROOM_DEPTH = 18;
@@ -2038,10 +2038,10 @@ export class RoomManager {
 
   addRoom4ArrowPanels() {
     const panelDefs = [
-      { direction: "up", label: "Up Arrow Panel", color: 0x71b8ff, position: [4.2, 1.46, 7.85], symbol: "↑" },
-      { direction: "left", label: "Left Arrow Panel", color: 0xff6f6f, position: [5.35, 1.46, 7.85], symbol: "←" },
-      { direction: "right", label: "Right Arrow Panel", color: 0xffd85e, position: [6.5, 1.46, 7.85], symbol: "→" },
-      { direction: "down", label: "Down Arrow Panel", color: 0x79da7d, position: [7.65, 1.46, 7.85], symbol: "↓" },
+      { direction: "up", label: "Up Arrow Panel", color: 0x71b8ff, position: [4.2, 1.46, 7.85] },
+      { direction: "left", label: "Left Arrow Panel", color: 0xff6f6f, position: [5.35, 1.46, 7.85] },
+      { direction: "right", label: "Right Arrow Panel", color: 0xffd85e, position: [6.5, 1.46, 7.85] },
+      { direction: "down", label: "Down Arrow Panel", color: 0x79da7d, position: [7.65, 1.46, 7.85] },
     ];
 
     for (const panelDef of panelDefs) {
@@ -2070,18 +2070,6 @@ export class RoomManager {
       this.roomGroup.add(panelHitbox);
       this.interactiveObjects.push(panelHitbox);
       this.room4ArrowPanels.push(panelHitbox);
-
-      const arrowLabel = this.makeWordNote(panelDef.symbol, "#ffffff", [panelDef.position[0], panelDef.position[1], panelDef.position[2] + 0.1], 0);
-      arrowLabel.scale.set(0.18, 0.24, 1);
-      arrowLabel.userData = {
-        kind: "room4ArrowPanel",
-        label: panelDef.label,
-        direction: panelDef.direction,
-        visualTarget: panel,
-      };
-      this.roomGroup.add(arrowLabel);
-      this.interactiveObjects.push(arrowLabel);
-      this.room4ArrowPanels.push(arrowLabel);
 
       panel.userData.visualTarget = panel;
     }
@@ -2804,12 +2792,6 @@ export class RoomManager {
     this.roomGroup.add(kickHitbox);
     this.interactiveObjects.push(kickHitbox);
 
-    const kickLabel = this.makeWordNote("KICK", "#fff4a8", [3.0, 1.52, -1.98], 0);
-    kickLabel.scale.set(0.34, 0.16, 1);
-    kickLabel.userData = { kind: "drumPad", drumName: "kick", label: "Kick" };
-    this.roomGroup.add(kickLabel);
-    this.interactiveObjects.push(kickLabel);
-
     const snare = new THREE.Mesh(
       new THREE.CylinderGeometry(0.32, 0.32, 0.28, 16),
       new THREE.MeshStandardMaterial({ color: 0x6ca7d8 }),
@@ -2829,12 +2811,6 @@ export class RoomManager {
     this.roomGroup.add(snareHitbox);
     this.interactiveObjects.push(snareHitbox);
 
-    const snareLabel = this.makeWordNote("SNARE", "#fff4a8", [2.18, 1.52, -1.55], 0);
-    snareLabel.scale.set(0.36, 0.16, 1);
-    snareLabel.userData = { kind: "drumPad", drumName: "snare", label: "Snare" };
-    this.roomGroup.add(snareLabel);
-    this.interactiveObjects.push(snareLabel);
-
     const floorTom = new THREE.Mesh(
       new THREE.CylinderGeometry(0.38, 0.38, 0.42, 16),
       new THREE.MeshStandardMaterial({ color: 0x6ca7d8 }),
@@ -2853,12 +2829,6 @@ export class RoomManager {
     floorTomHitbox.userData = { kind: "drumPad", drumName: "floorTom", label: "Floor Tom" };
     this.roomGroup.add(floorTomHitbox);
     this.interactiveObjects.push(floorTomHitbox);
-
-    const floorTomLabel = this.makeWordNote("FLOOR TOM", "#fff4a8", [3.94, 1.52, -1.55], 0);
-    floorTomLabel.scale.set(0.46, 0.16, 1);
-    floorTomLabel.userData = { kind: "drumPad", drumName: "floorTom", label: "Floor Tom" };
-    this.roomGroup.add(floorTomLabel);
-    this.interactiveObjects.push(floorTomLabel);
 
     const hiHat = new THREE.Mesh(
       new THREE.CylinderGeometry(0.28, 0.28, 0.03, 20),
