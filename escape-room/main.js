@@ -1,8 +1,8 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
 import { PointerLockControls } from "https://esm.sh/three@0.164.1/examples/jsm/controls/PointerLockControls.js";
-import { Inventory } from "./inventory.js?v=20260420-hiddenpanelmessage";
-import { RoomManager } from "./roomManager.js?v=20260420-hiddenpanelmessage";
-import { UI } from "./ui.js?v=20260420-hiddenpanelmessage";
+import { Inventory } from "./inventory.js?v=20260420-flowlabels";
+import { RoomManager } from "./roomManager.js?v=20260420-flowlabels";
+import { UI } from "./ui.js?v=20260420-flowlabels";
 
 const PLAYER_RADIUS = 0.45;
 const MOVE_SPEED = 4.2;
@@ -643,14 +643,14 @@ function showSecondChoicePopup() {
     {
       title: "Do you wish to",
       text: "",
-      primaryLabel: "Go back to the start",
-      secondaryLabel: "Finish here",
-    },
-    () => {
-      restartGame();
+      primaryLabel: "Finish here",
+      secondaryLabel: "Start again",
     },
     () => {
       returnToRootHomePage();
+    },
+    () => {
+      restartGame();
     },
   );
 }
@@ -658,7 +658,7 @@ function showSecondChoicePopup() {
 function showContinuePopup(roomNumber) {
   ui.showFlowPopup(
     {
-      title: "Do you wish to continue",
+      title: "Do you wish to continue?",
       text: "",
       primaryLabel: "Yes",
       secondaryLabel: "No",
@@ -686,7 +686,7 @@ function showFinalRoomPopup() {
       restartGame();
     },
     () => {
-      returnToStartScreen();
+      returnToRootHomePage();
     },
   );
 }

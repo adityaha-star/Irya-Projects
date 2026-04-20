@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
-import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260420-hiddenpanelmessage";
+import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260420-flowlabels";
 
 const ROOM_WIDTH = 24;
 const ROOM_DEPTH = 18;
@@ -1980,8 +1980,8 @@ export class RoomManager {
     this.room4HiddenPanelFrame.position.set(10.26, 2.0, 1.14);
     this.roomGroup.add(this.room4HiddenPanelFrame);
 
-    this.room4HiddenPanelLabel = this.makeWordNote("Hidden Panel", "#2c3140", [10.18, 2.0, 1.2], -Math.PI / 2);
-    this.room4HiddenPanelLabel.scale.set(1.55, 0.64, 1);
+    this.room4HiddenPanelLabel = this.makeWordNote("Hidden panel", "#101827", [10.18, 2.0, 1.2], -Math.PI / 2);
+    this.room4HiddenPanelLabel.scale.set(2.25, 0.92, 1);
     this.room4HiddenPanelLabel.material.side = THREE.FrontSide;
     this.room4HiddenPanelLabel.material.depthTest = false;
     this.room4HiddenPanelLabel.material.depthWrite = false;
@@ -2039,10 +2039,10 @@ export class RoomManager {
 
   addRoom4ArrowPanels() {
     const panelDefs = [
-      { direction: "up", label: "Up Arrow Panel", color: 0x71b8ff, position: [4.2, 1.46, 7.85] },
-      { direction: "left", label: "Left Arrow Panel", color: 0xff6f6f, position: [5.35, 1.46, 7.85] },
-      { direction: "right", label: "Right Arrow Panel", color: 0xffd85e, position: [6.5, 1.46, 7.85] },
-      { direction: "down", label: "Down Arrow Panel", color: 0x79da7d, position: [7.65, 1.46, 7.85] },
+      { direction: "up", label: "Arrow Panel", color: 0x71b8ff, position: [4.2, 1.46, 7.85] },
+      { direction: "left", label: "Arrow Panel", color: 0xff6f6f, position: [5.35, 1.46, 7.85] },
+      { direction: "right", label: "Arrow Panel", color: 0xffd85e, position: [6.5, 1.46, 7.85] },
+      { direction: "down", label: "Arrow Panel", color: 0x79da7d, position: [7.65, 1.46, 7.85] },
     ];
 
     for (const panelDef of panelDefs) {
@@ -5395,7 +5395,7 @@ export class RoomManager {
         if (this.room4HiddenPanelLabel) {
           this.room4HiddenPanelLabel.visible = true;
           // Put the words on the opened panel side that faces the exit door.
-          this.room4HiddenPanelLabel.position.set(11.08, 2.08, 1.42);
+          this.room4HiddenPanelLabel.position.set(11.08, 2.1, 1.42);
           this.room4HiddenPanelLabel.rotation.y = 0;
         }
         if (this.room4HiddenPanelFrame) {
