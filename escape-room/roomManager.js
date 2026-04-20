@@ -1,5 +1,5 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
-import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260419-drumpadsound";
+import { ITEM_INFO, ROOM_INFO } from "./puzzles.js?v=20260420-playfix";
 
 const ROOM_WIDTH = 24;
 const ROOM_DEPTH = 18;

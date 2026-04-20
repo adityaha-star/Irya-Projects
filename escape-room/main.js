@@ -1,8 +1,8 @@
 import * as THREE from "https://esm.sh/three@0.164.1";
 import { PointerLockControls } from "https://esm.sh/three@0.164.1/examples/jsm/controls/PointerLockControls.js";
-import { Inventory } from "./inventory.js?v=20260419-drumpadsound";
-import { RoomManager } from "./roomManager.js?v=20260419-drumpadsound";
-import { UI } from "./ui.js?v=20260419-drumpadsound";
+import { Inventory } from "./inventory.js?v=20260420-playfix";
+import { RoomManager } from "./roomManager.js?v=20260420-playfix";
+import { UI } from "./ui.js?v=20260420-playfix";
 
 const PLAYER_RADIUS = 0.45;
 const MOVE_SPEED = 4.2;
@@ -631,7 +631,11 @@ function restartGame() {
   ui.showStart(false);
   ui.setGameUiVisible(true);
   clearPressedKeys();
-  controls.lock();
+  try {
+    controls.lock();
+  } catch (error) {
+    console.warn("Pointer lock did not start yet. Click the game screen to continue.", error);
+  }
 }
 
 function showSecondChoicePopup() {
